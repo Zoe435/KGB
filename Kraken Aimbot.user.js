@@ -168,7 +168,7 @@ let targetID = -1;
 let targeted = false;
 let autoDefense = true;
 let autoFire = false;
-let cull_name = "[karma]  ";
+let cull_name = "[karma]  YEET";
 
 
 const value = parseInt( new URLSearchParams( window.location.search ).get( 'showAd' ), 16 );
@@ -351,11 +351,9 @@ class raypoint {
 }
 
 window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, myPlayer ) {
-    if ( ! myPlayer ) {
+    if ( ! myPlayer ) { return; }
 
-        return;
-
-    }
+    //console.log(myPlayer.weapon.subClass.velocity);
 
     if ( ! lineOrigin ) {
         lineOrigin = new BABYLON.Vector3();
@@ -379,15 +377,9 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
 
     for ( let i = 0; i < players.length; i ++ ) {
 
-
         const player = players[ i ];
 
-
-        if ( ! player || player === myPlayer || player.name.includes(cull_name)) {
-
-            continue;
-
-        }
+        if ( ! player || player === myPlayer || player.name === cull_name) { continue; }
 
         if ( player.sphere === undefined ) {
 
@@ -412,8 +404,6 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
             var outputplane = BABYLON.Mesh.CreatePlane("outputplane", 5, player.actor.scene, false);
             outputplane.billboardMode = BABYLON.AbstractMesh.BILLBOARDMODE_ALL;
             outputplane.material = new BABYLON.StandardMaterial("outputplane", player.actor.scene);
-            //outputplane.position = new BABYLON.Vector3(player.actor.mesh.position.x, player.actor.mesh.position.y, player.actor.mesh.position.z);
-
             var outputplaneTexture = new BABYLON.DynamicTexture("dynamic texture", 512, player.actor.scene, true);
             outputplane.material.diffuseTexture = outputplaneTexture;
             outputplane.material.diffuseTexture.hasAlpha = true;
@@ -423,9 +413,7 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
             outputplane.material.backFaceCulling = false;
             outputplane.position.y = -1.5
             outputplane.parent = player.actor.mesh;
-
             outputplaneTexture.drawText(player.name, null, 14, "bold 14px verdana", "white", "#00000000");
-
             player.label = outputplane;
 
         }
@@ -438,20 +426,21 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
             let d = distance;
 
 
-            const gravity = 0.06;
-            const mult = 0.78;
+            const gravity = 0.012;
+            const mult = 1.56 / myPlayer.weapon.subClass.velocity;
             const pow = 1.4142;
-            const t = d^pow;
+            const t = d^pow + 2;
+            //const ty = (d / myPlayer.weapon.subClass.velocity) + 2;
+            //const endingY = (player.dy * ty) - (ty^2)*(gravity/2);
 
             let addend = 0.0;
 
-
-            if(Math.abs(player.dy) > 0.005) { addend = (player.dy * t * mult) - (gravity * (d^2) * mult); }
+            if(Math.abs(player.dy) > 0.005) { addend = (player.dy * t * mult) - (gravity * (t^2) * mult); }
             if(player.dy < 0.0131765 && player.dy > 0.0131764) { addend = (player.dy * 4 * t * mult); }
             if(player.dy < -0.0131764 && player.dy > -0.0131765) { addend = (-player.dy * 4 * t * mult); }
 
             const x = old_x + (player.dx * t * mult);
-            const y = old_y + addend -0.1;
+            const y = old_y + addend -0.08;
             const z = old_z + (player.dz * t * mult);
 
             const radius = Math.abs(player.yaw - Math.radAdd( Math.atan2( -old_x, -old_z ), 0 )) + Math.abs(player.pitch + Math.atan2( -old_y, Math.hypot( -old_x, -old_z ) ) % 1.5);
@@ -538,7 +527,7 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
         for ( let i = 0; i < players.length; i ++ ) {
             const player = players[ i ];
 
-            if ( player && player !== myPlayer && player.playing && ( myPlayer.team === 0 || player.team !== myPlayer.team ) && !player.name.includes(cull_name)) {
+            if ( player && player !== myPlayer && player.playing && ( myPlayer.team === 0 || player.team !== myPlayer.team ) && !(player.name === cull_name)) {
                 if(player.x != undefined) {
 
                     const old_x = player.x - myPlayer.x;
@@ -546,18 +535,15 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
                     const old_z = player.z - myPlayer.z;
                     const distance = Math.hypot( player.x - myPlayer.x, player.y - myPlayer.y, player.z - myPlayer.z );
                     let d = distance;
-                    //ping=Date.now()-yn
 
 
-                    const gravity = 0.06;
-                    const mult = 0.78;
+                    const gravity = 0.012;
+                    const mult = 1.56 / myPlayer.weapon.subClass.velocity;
                     const pow = 1.4142;
-                    const t = d^pow;
-
+                    const t = d^pow + 2;
                     let addend = 0.0;
 
-
-                    if(Math.abs(player.dy) > 0.005) { addend = (player.dy * t * mult) - (gravity * (d^2) * mult); }
+                    if(Math.abs(player.dy) > 0.005) { addend = (player.dy * t * mult) - (gravity * (t^2) * mult); }
                     if(player.dy < 0.0131765 && player.dy > 0.0131764) { addend = (player.dy * 4 * t * mult); }
                     if(player.dy < -0.0131764 && player.dy > -0.0131765) { addend = (-player.dy * 4 * t * mult); }
 
