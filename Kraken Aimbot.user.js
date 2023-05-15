@@ -112,8 +112,8 @@ window.XMLHttpRequest = class extends window.XMLHttpRequest {
 
 					window[ '${onUpdateFuncName}' ](
 						${"t"},
-                        ${"lt"},
-                        ${"dr"},
+                        ${"ct"},
+                        ${"pr"},
 						${playersVarName},
 						${myPlayerVarName}
 					);
@@ -128,11 +128,9 @@ window.XMLHttpRequest = class extends window.XMLHttpRequest {
 					}
 
 				function someFunctionWhichWillNeverBeUsedNow` )
-                .replace(`respawnTime=Li,`, `respawnTime=0,`)
-                .replace(`Li=Math.max(e,Li)`,`Li=0`)
-                .replace(`const t=getStoredNumber("lastPreRoll",Date.now())+e,i=m>1&&ir>1&&Date.now()>t;let r=Ma.timeToPlayVideoAd();`,
+                .replace(`const t=getStoredNumber("lastPreRoll",Date.now())+e,i=m>1&&rr>1&&Date.now()>t;let r=Ca.timeToPlayVideoAd();`,
                          `const t=getStoredNumber("lastPreRoll",Date.now())+e,i=0;let r=0;`)
-                .replace(`le&&!pwaBlockAds||Date.now()>t+i&&m%2==1&&!pwaBlockAds`, `0`)
+                .replace(`le&&!pwaBlockAds||Date.now()>t+i&&m>1&&!pwaBlockAds`, `0`)
                 .replace(`i.packString(e.playerName),`, `i.packString("(kgb)" + e.playerName),`)
 
                 //.replace(`var o=nt.rayCollidesWithMap(a.forwardRay.origin,a.forwardRay.direction,nt.projectileCollidesWithCell);`,
@@ -211,7 +209,7 @@ function fire_delayed_bullet(fire_class) {
         setTimeout(() => {
             fire_class.pullTrigger();
             resolve('firing trigger')
-        }, 35)
+        }, 10)
     })
 }
 
@@ -238,43 +236,25 @@ window.addEventListener( 'keyup', function ( event ) {
 	switch ( event.code ) {
         case 'KeyL' :
             autoDefense = ! autoDefense;
-
             showMsg( 'Defensive Tracking', autoDefense );
-
             break
-
         case 'KeyF' :
-
 			aimbotEnabled = false;
 			break;
-
         case 'KeyE' :
-
             autoFire = false;
             break;
-
 		case 'KeyV' :
-
 			espEnabled = ! espEnabled;
-
 			showMsg( 'ESP', espEnabled );
-
 			break;
-
         case 'KeyN' :
-
 			showLines = ! showLines;
-
 			showMsg( 'ESP Lines', showLines );
-
 			break;
-
 		case 'KeyH' :
-
 			infoEl.style.display = infoEl.style.display === '' ? 'none' : '';
-
 			break;
-
 	}
 } );
 window.addEventListener( 'keydown', function ( event ) {
@@ -286,16 +266,10 @@ window.addEventListener( 'keydown', function ( event ) {
 	}
 	switch ( event.code ) {
         case 'KeyE' :
-
 			autoFire = true;
-
 			break;
-	}
-    switch ( event.code ) {
         case 'KeyF' :
-
 			aimbotEnabled = true;
-
 			break;
 	}
 
@@ -426,22 +400,26 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
             let d = distance;
 
 
-            const gravity = 0.012;
+            const gravity = 0.05;
             const mult = 1.56 / myPlayer.weapon.subClass.velocity;
             const pow = 1.4142;
-            const t = d^pow + 2;
+            const t = d^pow;
             //const ty = (d / myPlayer.weapon.subClass.velocity) + 2;
             //const endingY = (player.dy * ty) - (ty^2)*(gravity/2);
 
-            let addend = 0.0;
+            let addend = -(gravity * (t^2) * mult);
 
-            if(Math.abs(player.dy) > 0.005) { addend = (player.dy * t * mult) - (gravity * (t^2) * mult); }
-            if(player.dy < 0.0131765 && player.dy > 0.0131764) { addend = (player.dy * 4 * t * mult); }
-            if(player.dy < -0.0131764 && player.dy > -0.0131765) { addend = (-player.dy * 4 * t * mult); }
+            if(player.climbing && player.dy > 0) { addend = (player.dy * 4 * t * mult); }
+            if(player.climbing && player.dy < 0) { addend = (-player.dy * 4 * t * mult); }
 
-            const x = old_x + (player.dx * t * mult);
-            const y = old_y + addend -0.08;
-            const z = old_z + (player.dz * t * mult);
+
+            let x = old_x + (player.dx * t * mult);
+            let y = old_y - 0.08 + (player.dy * t * mult);
+            let z = old_z + (player.dz * t * mult);
+
+            if (!player.onGround) {
+                y += addend;
+            }
 
             const radius = Math.abs(player.yaw - Math.radAdd( Math.atan2( -old_x, -old_z ), 0 )) + Math.abs(player.pitch + Math.atan2( -old_y, Math.hypot( -old_x, -old_z ) ) % 1.5);
 
@@ -477,9 +455,9 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
 
             player.lines.visibility = player.playing && player.sphere.visibility && showLines;
 
-
-            const player_ray = new raypoint(myPlayer.x, myPlayer.y + 0.4, myPlayer.z, distance);
-            const target_ray = new raypoint(x, y, z, distance);
+            const offset = 0.02;
+            const player_ray = new raypoint(myPlayer.x-offset, myPlayer.y+0.4, myPlayer.z-offset, distance);
+            const target_ray = new raypoint(x+offset, y+offset, z+offset, distance);
             player.viable = !tracer.rayCollidesWithMap(player_ray, target_ray, tracer.projectileCollidesWithCell);
             //console.log("does it collide?");
             //console.log(viable);
@@ -537,22 +515,36 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
                     let d = distance;
 
 
-                    const gravity = 0.012;
+                    const gravity = 0.05;
                     const mult = 1.56 / myPlayer.weapon.subClass.velocity;
                     const pow = 1.4142;
-                    const t = d^pow + 2;
-                    let addend = 0.0;
+                    const t = d^pow;
+                    let addend = -(gravity * (t^2) * mult);
 
-                    if(Math.abs(player.dy) > 0.005) { addend = (player.dy * t * mult) - (gravity * (t^2) * mult); }
-                    if(player.dy < 0.0131765 && player.dy > 0.0131764) { addend = (player.dy * 4 * t * mult); }
-                    if(player.dy < -0.0131764 && player.dy > -0.0131765) { addend = (-player.dy * 4 * t * mult); }
-
+                    if(player.climbing && player.dy > 0) { addend = (player.dy * 4 * t * mult); }
+                    if(player.climbing && player.dy < 0) { addend = (-player.dy * 4 * t * mult); }
 
 
+                    let x = old_x + (player.dx * t * mult);
+                    let y = old_y - 0.08 + (player.dy * t * mult);
+                    let z = old_z + (player.dz * t * mult);
 
-                    const x = old_x + (player.dx * t * mult);
-                    const y = old_y + addend - 0.1;
-                    const z = old_z + (player.dz * t * mult);
+                    if (!player.onGround) {
+                        y += addend;
+                    }
+
+                    if(!player.onGround && player.dy < 0) {
+                        const start_ray = new raypoint(player.x, player.y, player.z, addend);
+                        const end_ray = new raypoint(0, addend, 0, addend);
+                        const impact_point = tracer.rayCollidesWithMap(start_ray, end_ray, tracer.projectileCollidesWithCell);
+                        if(impact_point && impact_point.pick.pickedPoint.y > y) {
+                            y = impact_point.pick.pickedPoint.y - myPlayer.y +0.32;
+                            console.log("chosen y: " + y);
+                        }
+                    }
+
+                    //console.log(stringified);}
+
 
                     const r_distance = ( Math.abs(myPlayer.yaw - Math.radAdd( Math.atan2( x, z ), 0 ))
                                         + Math.abs(myPlayer.pitch + Math.atan2( y, Math.hypot( x, z ) ) % 1.5) );
@@ -613,18 +605,13 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
 
             myPlayer.yaw = Math.radAdd( Math.atan2( set_x, set_z ), 0 );
             myPlayer.pitch = - Math.atan2( set_y, Math.hypot( set_x, set_z ) ) % 1.5;
+            const distance = Math.hypot(myPlayer.x - targetPlayer.x, myPlayer.x - targetPlayer.x, myPlayer.x - targetPlayer.x);
             if (!targeted) {
                 targetID = targetPlayer.uniqueId;
             }
-            if (autoFire && targetPlayer.viable) {
-                if(targetPlayer.frame1) {
-                    targetPlayer.frame1 = false;
-                    fire_delayed_bullet(fire_class);
-                } else {
-                    targetPlayer.frame1 = true;
-                }
-            } else { targetPlayer.frame1 = false; }
-
+            if (autoFire && targetPlayer.viable && distance > 0 && myPlayer.shotSpread+myPlayer.weapon.inaccuracy < 0.3/distance) {
+                fire_delayed_bullet(fire_class);
+            }
         }
         else { targetID = -1; }
 
