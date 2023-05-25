@@ -74,14 +74,18 @@ window.XMLHttpRequest = class extends window.XMLHttpRequest {
 			let babylonVarName,
 				playersVarName,
 				myPlayerVarName,
+                tracerVarName,
+                fireVarName,
 				sceneVarName,
 				cullFuncName;
 
 			try {
 
-				babylonVarName = /new ([a-zA-Z]+)\.Vector3/.exec( code )[ 1 ];
+				babylonVarName = /this.origin=new ([a-zA-Z]+)\.Vector3,/.exec( code )[ 1 ];
 				playersVarName = /([^,]+)=\[\],{}/.exec( code )[ 1 ];
 				myPlayerVarName = /"fire":document.pointerLockElement&&([^&]+)&&/.exec( code )[ 1 ];
+                tracerVarName = /([a-zA-Z]+)\.rayCollidesWithMap/.exec( code )[ 1 ];
+                fireVarName = /([a-zA-Z]+)\.pullTrigger\(/.exec( code )[ 1 ];
 				sceneVarName = /createMapCells\(([^,]+),/.exec( code )[ 1 ];
 				cullFuncName = /=([a-zA-Z_$]+)\(this\.mesh,\.[0-9]+\)/.exec( code )[ 1 ];
 
@@ -94,12 +98,15 @@ window.XMLHttpRequest = class extends window.XMLHttpRequest {
 			}
 
 			function getVars() {
+                console.log(babylonVarName);
 
 				return {
 					babylonVarName,
 					playersVarName,
 					myPlayerVarName,
 					playersVarName,
+                    tracerVarName,
+                    fireVarName,
 					sceneVarName,
 					cullFuncName
 				};
@@ -111,9 +118,9 @@ window.XMLHttpRequest = class extends window.XMLHttpRequest {
 			return code.replace( sceneVarName + '.render()', `
 
 					window[ '${onUpdateFuncName}' ](
-						${"t"},
-                        ${"ct"},
-                        ${"pr"},
+						${babylonVarName},
+                        ${tracerVarName},
+                        ${fireVarName},
 						${playersVarName},
 						${myPlayerVarName}
 					);
@@ -132,6 +139,10 @@ window.XMLHttpRequest = class extends window.XMLHttpRequest {
                          `const t=getStoredNumber("lastPreRoll",Date.now())+e,i=0;let r=0;`)
                 .replace(`le&&!pwaBlockAds||Date.now()>t+i&&m>1&&!pwaBlockAds`, `0`)
                 .replace(`i.packString(e.playerName),`, `i.packString("(kgb)" + e.playerName),`)
+                .replace(`var r=Oi.getBuffer();r.packInt8(Ue.chat),r.packString(i)`,`var r=Oi.getBuffer();var char_map = {"0":"𝟎","1":"𝟏","2":"𝟐","3":"𝟑","4":"𝟒","5":"𝟓","6":"𝟔","7":"𝟕","8":"𝟖","9":"𝟗","a":"𝐚","b":"𝐛","c":"𝐜","d":"𝐝","e":"𝐞","f":"𝐟","g":"𝐠","h":"𝐡","i":"𝐢","j":"𝐣","k":"𝐤","l":"𝐥","m":"𝐦","n":"𝐧","o":"𝐨","p":"𝐩","q":"𝐪","r":"𝐫","s":"𝐬","t":"𝐭","u":"𝐮","v":"𝐯","w":"𝐰","x":"𝐱","y":"𝐲","z":"𝐳","A":"𝐀","B":"𝐁","C":"𝐂","D":"𝐃","E":"𝐄","F":"𝐅","G":"𝐆","H":"𝐇","I":"𝐈","J":"𝐉","K":"𝐊","L":"𝐋","M":"𝐌","N":"𝐍","O":"𝐎","P":"𝐏","Q":"𝐐","R":"𝐑","S":"𝐒","T":"𝐓","U":"𝐔","V":"𝐕","W":"𝐖","X":"𝐗","Y":"𝐘","Z":"𝐙"};let new_chat="";for(let z=0;z<i.length;z++){new_chat+=char_map[i[z]] === undefined ?  i[z] : char_map[i[z]];}r.packInt8(Ue.chat),r.packString(new_chat)`)
+                .replace(`this.colorIdx=e.colorIdx,this.colorIdx>=7&&!1===this.isUpgraded()&&(this.colorIdx=0)`, `this.colorIdx = e.colorIdx`)
+                .replace(`this.colorIdx>=7&&!t&&(this.colorIdx=0),`, ``)
+                //.replace(`changeCharacter=function(e,t,i,r,n,a,o,s){var l`, `changeCharacter=function(e,t,i,unused,n,a,o,s){const r = 7;console.log("color is");console.log(r);var l`)
 
                 //.replace(`var o=nt.rayCollidesWithMap(a.forwardRay.origin,a.forwardRay.direction,nt.projectileCollidesWithCell);`,
                 //         `var o=nt.rayCollidesWithMap(a.forwardRay.origin,a.forwardRay.direction,nt.projectileCollidesWithCell);console.log("collision:");console.log(!(o==false));`)
@@ -140,7 +151,8 @@ window.XMLHttpRequest = class extends window.XMLHttpRequest {
                 //.replace(`rayCollidesWithPlayer:function(e,t,i,r){fo`, `rayCollidesWithPlayer:function(e,t,i,r){console.log("called:  -------------");console.log(e);console.log(t);console.log(r);fo`)
                 //.replace(`let t=40;this.player.activeShellStreaks&We.EggBreaker&&(t=255),`,`let t=255;`)
                 //.replaceAll(`,300`, `,0`)
-                //.replace("r.packInt8(Le.chat)", "r.packInt8(Le.chat.replaceAll(\"a\",\"α\").replaceAll(\"b\",\"Ⴆ\").replaceAll(\"c\",\"ƈ\").replaceAll(\"d\",\"ԃ\").replaceAll(\"e\",\"ҽ\").replaceAll(\"f\",\"ϝ\").replaceAll(\"g\",\"ɠ\").replaceAll(\"h\",\"ԋ\").replaceAll(\"i\",\"ι\").replaceAll(\"j\",\"ʝ\").replaceAll(\"k\",\"ƙ\").replaceAll(\"l\",\"ʅ\").replaceAll(\"m\",\"ɱ\").replaceAll(\"n\",\"ɳ\").replaceAll(\"o\",\"σ\").replaceAll(\"p\",\"ρ\").replaceAll(\"q\",\"ϙ\").replaceAll(\"r\",\"ɾ\").replaceAll(\"s\",\"ʂ\").replaceAll(\"t\",\"ƚ\").replaceAll(\"u\",\"υ\").replaceAll(\"v\",\"ʋ\").replaceAll(\"w\",\"ɯ\").replaceAll(\"x\",\"x\").replaceAll(\"y\",\"ყ\").replaceAll(\"z\",\"ȥ\"))")
+                //𝐚𝐛𝐜𝐝𝐞𝐟𝐠𝐡𝐢𝐣𝐤𝐥𝐦𝐧𝐨𝐩𝐪𝐫𝐬𝐭𝐮𝐯𝐰𝐱𝐲𝐳
+                //.replace("r.packInt8(Le.chat)", "r.packInt8(Le.chat.replaceAll(\"a\",\"𝐚\").replaceAll(\"b\",\"𝐛\").replaceAll(\"c\",\"𝐜\").replaceAll(\"d\",\"𝐝\").replaceAll(\"e\",\"𝐞\").replaceAll(\"f\",\"𝐟\").replaceAll(\"g\",\"𝐠\").replaceAll(\"h\",\"𝐡\").replaceAll(\"i\",\"𝐢\").replaceAll(\"j\",\"𝐣\").replaceAll(\"k\",\"𝐤\").replaceAll(\"l\",\"𝐥\").replaceAll(\"m\",\"𝐦\").replaceAll(\"n\",\"𝐧\").replaceAll(\"o\",\"𝐨\").replaceAll(\"p\",\"𝐩\").replaceAll(\"q\",\"𝐪\").replaceAll(\"r\",\"𝐫\").replaceAll(\"s\",\"𝐬\").replaceAll(\"t\",\"𝐭\").replaceAll(\"u\",\"𝐮\").replaceAll(\"v\",\"𝐯\").replaceAll(\"w\",\"𝐰\").replaceAll(\"x\",\"𝐱\").replaceAll(\"y\",\"𝐲\").replaceAll(\"z\",\"𝐳\"))")
                 //.replace(`this.player.shotSpread + this.inaccuracy`, `0`)
                 ;
                 //
@@ -167,7 +179,7 @@ let targeted = false;
 let autoDefense = true;
 let autoFire = false;
 let cull_name = "[karma]  YEET";
-
+const gravity = 0.045;
 
 const value = parseInt( new URLSearchParams( window.location.search ).get( 'showAd' ), 16 );
 
@@ -209,7 +221,7 @@ function fire_delayed_bullet(fire_class) {
         setTimeout(() => {
             fire_class.pullTrigger();
             resolve('firing trigger')
-        }, 10)
+        }, 50)
     })
 }
 
@@ -327,8 +339,6 @@ class raypoint {
 window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, myPlayer ) {
     if ( ! myPlayer ) { return; }
 
-    //console.log(myPlayer.weapon.subClass.velocity);
-
     if ( ! lineOrigin ) {
         lineOrigin = new BABYLON.Vector3();
         linesArray = [];
@@ -400,27 +410,36 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
             let d = distance;
 
 
-            const gravity = 0.05;
-            const mult = 1.56 / myPlayer.weapon.subClass.velocity;
+            const mult = 1.5 / myPlayer.weapon.subClass.velocity;
             const pow = 1.4142;
-            let t = d^pow;
-            if(autoFire) {t -= 0.5};
+            let t = d^pow * mult;
+            if(autoFire) {t -= 1};
             //const ty = (d / myPlayer.weapon.subClass.velocity) + 2;
             //const endingY = (player.dy * ty) - (ty^2)*(gravity/2);
 
-            let addend = -(gravity * (t^2) * mult);
+            let addend = (player.dy * t) - (gravity * (t^2.6));
 
-            if(player.climbing && player.dy > 0) { addend = (player.dy * 4 * t * mult); }
-            if(player.climbing && player.dy < 0) { addend = (-player.dy * 4 * t * mult); }
+            if(player.climbing && player.dy > 0) { addend = (player.dy * 4 * t); }
+            if(player.climbing && player.dy < 0) { addend = (-player.dy * 4 * t); }
 
 
-            let x = old_x + (player.dx * t * mult);
-            let y = old_y - 0.08 + (player.dy * t * mult);
-            let z = old_z + (player.dz * t * mult);
+            let x = old_x + (player.dx * t);
+            let y = old_y - 0.08;
+            let z = old_z + (player.dz * t);
 
             if (!player.onGround) {
                 y += addend;
             }
+
+            if(!player.onGround && player.dy < 0) {
+                const start_ray = new raypoint(player.x, player.y, player.z, addend);
+                const end_ray = new raypoint(0, addend, 0, addend);
+                const impact_point = tracer.rayCollidesWithMap(start_ray, end_ray, tracer.grenadeCollidesWithCell);
+                if(impact_point && impact_point.pick.pickedPoint.y > y) {
+                    y = (impact_point.pick.pickedPoint.y - 0.08) - myPlayer.y;
+                }
+            }
+
 
             const radius = Math.abs(player.yaw - Math.radAdd( Math.atan2( -old_x, -old_z ), 0 )) + Math.abs(player.pitch + Math.atan2( -old_y, Math.hypot( -old_x, -old_z ) ) % 1.5);
 
@@ -456,7 +475,7 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
 
             player.lines.visibility = player.playing && player.sphere.visibility && showLines;
 
-            const offset = 0.02;
+            const offset = 0.00;
             const player_ray = new raypoint(myPlayer.x-offset, myPlayer.y+0.4, myPlayer.z-offset, distance);
             const target_ray = new raypoint(x+offset, y+offset, z+offset, distance);
             player.viable = !tracer.rayCollidesWithMap(player_ray, target_ray, tracer.projectileCollidesWithCell);
@@ -516,19 +535,18 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
                     let d = distance;
 
 
-                    const gravity = 0.06;
-                    const mult = 1.56 / myPlayer.weapon.subClass.velocity;
+                    const mult = 1.5 / myPlayer.weapon.subClass.velocity;
                     const pow = 1.4142;
-                    const t = d^pow;
-                    let addend = -(gravity * (t^2) * mult);
+                    let t = d^pow * mult;
+                    let addend = (player.dy * t) - (gravity * (t^2.6));
 
-                    if(player.climbing && player.dy > 0) { addend = (player.dy * 4 * t * mult); }
-                    if(player.climbing && player.dy < 0) { addend = (-player.dy * 4 * t * mult); }
+                    if(player.climbing && player.dy > 0) { addend = (player.dy * 4 * t); }
+                    if(player.climbing && player.dy < 0) { addend = (-player.dy * 4 * t); }
 
 
-                    let x = old_x + (player.dx * t * mult);
-                    let y = old_y - 0.08 + (player.dy * t * mult);
-                    let z = old_z + (player.dz * t * mult);
+                    let x = old_x + (player.dx * t);
+                    let y = old_y - 0.08;
+                    let z = old_z + (player.dz * t);
 
                     if (!player.onGround) {
                         y += addend;
@@ -539,8 +557,7 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
                         const end_ray = new raypoint(0, addend, 0, addend);
                         const impact_point = tracer.rayCollidesWithMap(start_ray, end_ray, tracer.projectileCollidesWithCell);
                         if(impact_point && impact_point.pick.pickedPoint.y > y) {
-                            y = impact_point.pick.pickedPoint.y - myPlayer.y +0.32;
-                            console.log("chosen y: " + y);
+                            y = (impact_point.pick.pickedPoint.y - 0.08) - myPlayer.y;
                         }
                     }
 
@@ -549,6 +566,7 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
 
                     const r_distance = ( Math.abs(myPlayer.yaw - Math.radAdd( Math.atan2( x, z ), 0 ))
                                         + Math.abs(myPlayer.pitch + Math.atan2( y, Math.hypot( x, z ) ) % 1.5) );
+
                     if ( targetID != -1 ) {
                         if ( player.uniqueId == targetID ) {
                             targetPlayer = player;
@@ -559,8 +577,8 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
                         }
                     }
                     else {
-                        if ((r_distance < 0.2 && r_distance < minDistance) &&
-                            !(autoFire && myPlayer.primaryWeaponItem.category_name == "Ranger Primary Weapons" && !player.viable)) {
+                        if ((r_distance < 0.4 && r_distance < minDistance) &&
+                            !(autoFire && !player.viable)) {
                             targetPlayer = player;
                             minDistance = r_distance;
                             set_x = x;
@@ -569,7 +587,7 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
                         }
 
                         if ( distance * 1000 < minDistance &&
-                            !(autoFire && myPlayer.primaryWeaponItem.category_name == "Ranger Primary Weapons" && !player.viable)) {
+                            !(autoFire && !player.viable)) {
 
                             minDistance = d * 1000;
 
@@ -610,7 +628,7 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
             if (!targeted) {
                 targetID = targetPlayer.uniqueId;
             }
-            if (autoFire && targetPlayer.viable && distance > 0 && myPlayer.shotSpread+myPlayer.weapon.inaccuracy < 0.3/distance) {
+            if (autoFire && targetPlayer.viable && distance > 0 && myPlayer.shotSpread+myPlayer.weapon.inaccuracy < 0.3/(distance^1.41)) {
                 fire_delayed_bullet(fire_class);
             }
         }
