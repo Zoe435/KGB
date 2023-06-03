@@ -138,18 +138,20 @@ window.XMLHttpRequest = class extends window.XMLHttpRequest {
 
 
 				function someFunctionWhichWillNeverBeUsedNow` )
-                .replace(`const t=getStoredNumber("lastPreRoll",Date.now())+e,i=m>1&&rr>1&&Date.now()>t;let r=Ca.timeToPlayVideoAd();`,
+                .replace(`const t=getStoredNumber("lastPreRoll",Date.now())+e,i=m>1&&ar>1&&Date.now()>t;let r=Oa.timeToPlayVideoAd();`,
                          `const t=getStoredNumber("lastPreRoll",Date.now())+e,i=0;let r=0;`)
-                .replace(`le&&!pwaBlockAds||Date.now()>t+i&&m>1&&!pwaBlockAds`, `0`)
+                //.replace(`le&&!pwaBlockAds||Date.now()>t+i&&m>1&&!pwaBlockAds`, `0`)
+                .replace(`!ye)`, `0)`)
+                //.replace(`crazyGamesActive||testCrazy`,`0`)
                 .replace(`function eo(e){console.log("prepareToJoinGame",e),`,`function eo(e){e.uuid=69420;console.log("prepareToJoinGame",e),`)
                 .replace(`i.packString(e.playerName),`, `i.packString("(кgв)" + e.playerName),`)
-                //.replace(`var r=ki.getBuffer();r.packInt8(ze.chat),r.packString(i)`,`var r=ki.getBuffer();var char_map = {"0":"𝟎","1":"𝟏","2":"𝟐","3":"𝟑","4":"𝟒","5":"𝟓","6":"𝟔","7":"𝟕","8":"𝟖","9":"𝟗","a":"𝔞","b":"𝔟","c":"𝔠","d":"𝔡","e":"𝔢","f":"𝔣","g":"𝔤","h":"𝔥","i":"𝔦","j":"𝔧","k":"𝔨","l":"𝔩","m":"𝔪","n":"𝔫","o":"𝔬","p":"𝔭","q":"𝔮","r":"𝔯","s":"𝔰","t":"𝔱","u":"𝔲","v":"𝔳","w":"𝔴","x":"𝔵","y":"𝔶","z":"𝔷","A":"𝔄","B":"𝔅","C":"ℭ","D":"𝔇","E":"𝔈","F":"𝔉","G":"𝔊","H":"ℌ","I":"ℑ","J":"𝔍","K":"𝔎","L":"𝔏","M":"𝔐","N":"𝔑","O":"𝔒","P":"𝔓","Q":"𝔔","R":"ℜ","S":"𝔖","T":"𝔗","U":"𝔘","V":"𝔙","W":"𝔚","X":"𝔛","Y":"𝔜","Z":"ℨ"};let new_chat="";for(let z=0;z<i.length;z++){new_chat+=char_map[i[z]] === undefined ?  i[z] : char_map[i[z]];}r.packInt8(ze.chat),r.packString(new_chat)`)
-                //.replace(`var r=ki.getBuffer();r.packInt8(ze.chat),r.packString(i)`,`var r=ki.getBuffer();var char_map = {"0":"𝟎","1":"𝟏","2":"𝟐","3":"𝟑","4":"𝟒","5":"𝟓","6":"𝟔","7":"𝟕","8":"𝟖","9":"𝟗","a":"𝐚","b":"𝐛","c":"𝐜","d":"𝐝","e":"𝐞","f":"𝐟","g":"𝐠","h":"𝐡","i":"𝐢","j":"𝐣","k":"𝐤","l":"𝐥","m":"𝐦","n":"𝐧","o":"𝐨","p":"𝐩","q":"𝐪","r":"𝐫","s":"𝐬","t":"𝐭","u":"𝐮","v":"𝐯","w":"𝐰","x":"𝐱","y":"𝐲","z":"𝐳","A":"𝐀","B":"𝐁","C":"𝐂","D":"𝐃","E":"𝐄","F":"𝐅","G":"𝐆","H":"𝐇","I":"𝐈","J":"𝐉","K":"𝐊","L":"𝐋","M":"𝐌","N":"𝐍","O":"𝐎","P":"𝐏","Q":"𝐐","R":"𝐑","S":"𝐒","T":"𝐓","U":"𝐔","V":"𝐕","W":"𝐖","X":"𝐗","Y":"𝐘","Z":"𝐙"};let new_chat="";for(let z=0;z<i.length;z++){new_chat+=char_map[i[z]] === undefined ?  i[z] : char_map[i[z]];}r.packInt8(ze.chat),r.packString(new_chat)`)
-                //.replace(`var r=ki.getBuffer();r.packInt8(ze.chat),r.packString(i)`,`var r=ki.getBuffer();var char_map = {"0":"𝟬","1":"𝟭","2":"𝟮","3":"𝟯","4":"𝟰","5":"𝟱","6":"𝟲","7":"𝟳","8":"𝟴","9":"𝟵","a":"𝗮","b":"𝗯","c":"𝗰","d":"𝗱","e":"𝗲","f":"𝗳","g":"𝗴","h":"𝗵","i":"𝗶","j":"𝗷","k":"𝗸","l":"𝗹","m":"𝗺","n":"𝗻","o":"𝗼","p":"𝗽","q":"𝗾","r":"𝗿","s":"𝘀","t":"𝘁","u":"𝘂","v":"𝘃","w":"𝘄","x":"𝘅","y":"𝘆","z":"𝘇","A":"𝗔","B":"𝗕","C":"𝗖","D":"𝗗","E":"𝗘","F":"𝗙","G":"𝗚","H":"𝗛","I":"𝗜","J":"𝗝","K":"𝗞","L":"𝗟","M":"𝗠","N":"𝗡","O":"𝗢","P":"𝗣","Q":"𝗤","R":"𝗥","S":"𝗦","T":"𝗧","U":"𝗨","V":"𝗩","W":"𝗪","X":"𝗫","Y":"𝗬","Z":"𝗭"};let new_chat="";for(let z=0;z<i.length;z++){new_chat+=char_map[i[z]] === undefined ?  i[z] : char_map[i[z]];}r.packInt8(ze.chat),r.packString(new_chat)`)
+                //.replace(`var r=ki.getBuffer();r.packInt8(ze.chat),r.packString(i)`,`var r=ki.getBuffer();var char_map = {"0":"𝟎","1":"𝟏","2":"𝟐","3":"𝟑","4":"𝟒","5":"𝟓","6":"𝟔","7":"𝟕","8":"𝟖","9":"𝟗","a":"𝔞","b":"𝔟","c":"𝔠","d":"𝔡","e":"𝔢","f":"𝔣","g":"𝔤","h":"𝔥","i":"𝔦","j":"𝔧","k":"𝔨","l":"𝔩","m":"𝔪","n":"𝔫","o":"𝔬","p":"𝔭","q":"𝔮","r":"𝔯","s":"𝔰","t":"𝔱","u":"𝔲","v":"𝔳","w":"𝔴","x":"𝔵","y":"𝔶","z":"𝔷","A":"𝔄","B":"𝔅","C":"ℭ","D":"𝔇","E":"𝔈","F":"𝔉","G":"𝔊","H":"ℌ","I":"ℑ","J":"𝔍","K":"𝔎","L":"𝔏","M":"𝔐","N":"𝔑","O":"𝔒","P":"𝔓","Q":"𝔔","R":"ℜ","S":"𝔖","T":"𝔗","U":"𝔘","V":"𝔙","W":"𝔚","X":"𝔛","Y":"𝔜","Z":"ℨ"};let new_chat="";for(let z=0;z<i.length;z++){new_chat+=char_map[i[z]] === undefined ?  i[z] : char_map[i[z]];}r.packInt8(Xe.chat),r.packString(new_chat)`)
+                //.replace(`var r=ki.getBuffer();r.packInt8(ze.chat),r.packString(i)`,`var r=ki.getBuffer();var char_map = {"0":"𝟎","1":"𝟏","2":"𝟐","3":"𝟑","4":"𝟒","5":"𝟓","6":"𝟔","7":"𝟕","8":"𝟖","9":"𝟗","a":"𝐚","b":"𝐛","c":"𝐜","d":"𝐝","e":"𝐞","f":"𝐟","g":"𝐠","h":"𝐡","i":"𝐢","j":"𝐣","k":"𝐤","l":"𝐥","m":"𝐦","n":"𝐧","o":"𝐨","p":"𝐩","q":"𝐪","r":"𝐫","s":"𝐬","t":"𝐭","u":"𝐮","v":"𝐯","w":"𝐰","x":"𝐱","y":"𝐲","z":"𝐳","A":"𝐀","B":"𝐁","C":"𝐂","D":"𝐃","E":"𝐄","F":"𝐅","G":"𝐆","H":"𝐇","I":"𝐈","J":"𝐉","K":"𝐊","L":"𝐋","M":"𝐌","N":"𝐍","O":"𝐎","P":"𝐏","Q":"𝐐","R":"𝐑","S":"𝐒","T":"𝐓","U":"𝐔","V":"𝐕","W":"𝐖","X":"𝐗","Y":"𝐘","Z":"𝐙"};let new_chat="";for(let z=0;z<i.length;z++){new_chat+=char_map[i[z]] === undefined ?  i[z] : char_map[i[z]];}r.packInt8(Xe.chat),r.packString(new_chat)`)
+                //.replace(`var r=ki.getBuffer();r.packInt8(ze.chat),r.packString(i)`,`var r=ki.getBuffer();var char_map = {"0":"𝟬","1":"𝟭","2":"𝟮","3":"𝟯","4":"𝟰","5":"𝟱","6":"𝟲","7":"𝟳","8":"𝟴","9":"𝟵","a":"𝗮","b":"𝗯","c":"𝗰","d":"𝗱","e":"𝗲","f":"𝗳","g":"𝗴","h":"𝗵","i":"𝗶","j":"𝗷","k":"𝗸","l":"𝗹","m":"𝗺","n":"𝗻","o":"𝗼","p":"𝗽","q":"𝗾","r":"𝗿","s":"𝘀","t":"𝘁","u":"𝘂","v":"𝘃","w":"𝘄","x":"𝘅","y":"𝘆","z":"𝘇","A":"𝗔","B":"𝗕","C":"𝗖","D":"𝗗","E":"𝗘","F":"𝗙","G":"𝗚","H":"𝗛","I":"𝗜","J":"𝗝","K":"𝗞","L":"𝗟","M":"𝗠","N":"𝗡","O":"𝗢","P":"𝗣","Q":"𝗤","R":"𝗥","S":"𝗦","T":"𝗧","U":"𝗨","V":"𝗩","W":"𝗪","X":"𝗫","Y":"𝗬","Z":"𝗭"};let new_chat="";for(let z=0;z<i.length;z++){new_chat+=char_map[i[z]] === undefined ?  i[z] : char_map[i[z]];}r.packInt8(Xe.chat),r.packString(new_chat)`)
                 //Attempted Color Replace:   .replace(`changeCharacter=function(e,t,i,r,n,a,o,s){var l`, `changeCharacter=function(e,t,i,unused,n,a,o,s){const r = 7;console.log("color is");console.log(r);var l`)
                 //.replace(`for(var t=0;t<this.inventory.length;t++)if(this.inventory[t]&&this.inventory[t].id===e.id)`, `for(var t=-1234576;t<3;t++)`)
-                .replace(/inStore:0,/g,`inStore:1,`)
-                .replace(/isActive:!1,/g,` isActive:!0`)
+                //.replace(/inStore:0,/g,`inStore:1,`)
+                //.replace(/isActive:!1,/g,` isActive:!0`)
                 //.replace(`X.firebaseId&&(i.packInt32(X.session),i.packString(X.firebaseId)),`, `X.firebaseId&&(i.packInt32(X.session),i.packString("N9GyXvkBMmRYK3VVVBNNrtcAa3k0")),`)
                 //.replace(`var o=nt.rayCollidesWithMap(a.forwardRay.origin,a.forwardRay.direction,nt.projectileCollidesWithCell);`,
                 //         `var o=nt.rayCollidesWithMap(a.forwardRay.origin,a.forwardRay.direction,nt.projectileCollidesWithCell);console.log("collision:");console.log(!(o==false));`)
@@ -425,10 +427,10 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
             let d = distance;
 
 
-            const mult = 1.65 / myPlayer.weapon.subClass.velocity;
+            const mult = 1.56 / myPlayer.weapon.subClass.velocity;
             let t = (d+pow) * mult;
-            //let v_t = (d+pow) / myPlayer.weapon.subClass.velocity;
-            let addend = (player.dy * t * 0.5) - (gravity * (t**2));
+            let v_t = (d+pow) / myPlayer.weapon.subClass.velocity;
+            let addend = (player.dy * v_t) - (gravity * (v_t**2));
 
             if(player.climbing && player.dy > 0) { addend = (player.dy * 4 * t); }
             if(player.climbing && player.dy < 0) { addend = (-player.dy * 4 * t); }
@@ -545,10 +547,10 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
                     const distance = Math.hypot( player.x - myPlayer.x, player.y - myPlayer.y, player.z - myPlayer.z );
                     let d = distance;
 
-                    const mult = 1.65 / myPlayer.weapon.subClass.velocity;
+                    const mult = 1.56 / myPlayer.weapon.subClass.velocity;
                     let t = (d+pow) * mult;
                     let v_t = (d+pow) / myPlayer.weapon.subClass.velocity;
-                    let addend = (player.dy * t * 0.5) - (gravity * (t**2));
+                    let addend = (player.dy * v_t) - (gravity * (v_t**2));
 
                     if(player.climbing && player.dy > 0) { addend = (player.dy * 4 * t); }
                     if(player.climbing && player.dy < 0) { addend = (-player.dy * 4 * t); }
