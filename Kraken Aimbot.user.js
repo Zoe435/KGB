@@ -637,7 +637,6 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, players, myPlayer, cras
                     const target_y = myPlayer.y - player.y;
                     const target_z = myPlayer.z - player.z;
                     const radius = Math.abs(player.yaw - Math.radAdd( Math.atan2( target_x, target_z ), 0 )) + Math.abs(player.pitch + Math.atan2( target_y, Math.hypot( target_x, target_z ) ) % 1.5);
-
                     if(autoDefense && player.viable && (radius < 2 / d || (player.primaryWeaponItem.category_name == "Eggsploder Primary Weapons" && radius < 0.1) || d < 2)) {
                         targeted = true;
                         targetPlayer = player;
@@ -662,7 +661,9 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, players, myPlayer, cras
             if (!targeted) {
                 targetID = targetPlayer.uniqueId;
             }
-            if (autoFire && targetPlayer.viable && distance > 0 && myPlayer.shotSpread < 0.15/(distance^2)) {
+            console.log(myPlayer.weapon.accuracy < 1.5/(distance));
+            if (autoFire && targetPlayer.viable && distance > 0 && myPlayer.weapon.accuracy < 0.15/(distance^2)) {
+                console.log("pulling");
                 fire_delayed_bullet(myPlayer);
             }
             if (!targetPlayer.viable/* && myPlayer.primaryWeaponItem.category_name == "Ranger Primary Weapons"*/) { targetID = -1; }
