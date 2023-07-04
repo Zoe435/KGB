@@ -661,9 +661,7 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, players, myPlayer, cras
             if (!targeted) {
                 targetID = targetPlayer.uniqueId;
             }
-            console.log(myPlayer.weapon.accuracy < 1.5/(distance));
-            if (autoFire && targetPlayer.viable && distance > 0 && myPlayer.weapon.accuracy < 0.15/(distance^2)) {
-                console.log("pulling");
+            if (autoFire && targetPlayer.viable && distance > 0 && myPlayer.weapon.accuracy < 0.3/(distance^2)) {
                 fire_delayed_bullet(myPlayer);
             }
             if (!targetPlayer.viable/* && myPlayer.primaryWeaponItem.category_name == "Ranger Primary Weapons"*/) { targetID = -1; }
