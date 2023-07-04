@@ -76,7 +76,6 @@ window.XMLHttpRequest = class extends window.XMLHttpRequest {
 				playersVarName,
 				myPlayerVarName,
                 tracerVarName,
-                fireVarName,
 				sceneVarName,
 				cullFuncName;
 
@@ -86,7 +85,6 @@ window.XMLHttpRequest = class extends window.XMLHttpRequest {
 				playersVarName = /([^,]+)=\[\],{}/.exec( code )[ 1 ];
 				myPlayerVarName = /"fire":document.pointerLockElement&&([^&]+)&&/.exec( code )[ 1 ];
                 tracerVarName = /([a-zA-Z]+)\.rayCollidesWithMap/.exec( code )[ 1 ];
-                fireVarName = /([a-zA-Z]+)\.pullTrigger\(/.exec( code )[ 1 ];
 				sceneVarName = /createMapCells\(([^,]+),/.exec( code )[ 1 ];
 				cullFuncName = /=([a-zA-Z_$]+)\(this\.mesh,\.[0-9]+\)/.exec( code )[ 1 ];
 
@@ -107,7 +105,6 @@ window.XMLHttpRequest = class extends window.XMLHttpRequest {
 					myPlayerVarName,
 					playersVarName,
                     tracerVarName,
-                    fireVarName,
 					sceneVarName,
 					cullFuncName
 				};
@@ -121,9 +118,9 @@ window.XMLHttpRequest = class extends window.XMLHttpRequest {
 					window[ '${onUpdateFuncName}' ](
 						${babylonVarName},
                         ${tracerVarName},
-                        ${fireVarName},
 						${playersVarName},
-						${myPlayerVarName}
+						${myPlayerVarName},
+                        He
 					);
 
 				${sceneVarName}.render()` )
@@ -141,19 +138,26 @@ window.XMLHttpRequest = class extends window.XMLHttpRequest {
                 //.replace(`const t=getStoredNumber("lastPreRoll",Date.now())+e,i=m>1&&ar>1&&Date.now()>t;let r=Oa.timeToPlayVideoAd();`,
                 //         `const t=getStoredNumber("lastPreRoll",Date.now())+e,i=0;let r=0;`)
                 //.replace(`le&&!pwaBlockAds||Date.now()>t+i&&m>1&&!pwaBlockAds`, `0`)
-                .replace(`!ye)`, `0)`)
+                //.replace(`!ye)`, `0)`)
+                .replace(`vueApp.showLoadingScreenAd(),`,``)
                 //.replace(`!0===r||!1`, `!1&&!0`)
                 .replace(`!0===r||!1!==r&&!!i`, `!1===!0`)
+                .replace(`i>-1||n>-1||a>-1`,`0`)
+                .replace(`!pwaBlockAds||`, `0&&`)
                 //.replace(`!0===r||!1!==r&&!!i`,`!1`)
                 //.replace(`void xi("shellshock.io_preroll",Br)):Hr()`,`Hr()):Hr()`)
                 //.replace(`?(sr=!0,void xi("shellshock.io_preroll",Br)):Hr()`,`,Hr()`)
                 //.replace(`if(ye)return!1`, `return!1`)
                 //.replace(`crazyGamesActive||testCrazy`,`0`)
-                .replace(`function eo(e){console.log("prepareToJoinGame",e),`,`function eo(e){e.uuid=69420;console.log("prepareToJoinGame",e),`)
+                //.replace(`function eo(e){console.log("prepareToJoinGame",e),`,`function eo(e){e.uuid=69420;console.log("prepareToJoinGame",e),`)
                 .replace(`i.packString(e.playerName),`, `i.packString("(кgв)" + e.playerName),`)
-                //.replace(`var r=ki.getBuffer();r.packInt8(ze.chat),r.packString(i)`,`var r=ki.getBuffer();var char_map = {"0":"𝟎","1":"𝟏","2":"𝟐","3":"𝟑","4":"𝟒","5":"𝟓","6":"𝟔","7":"𝟕","8":"𝟖","9":"𝟗","a":"𝔞","b":"𝔟","c":"𝔠","d":"𝔡","e":"𝔢","f":"𝔣","g":"𝔤","h":"𝔥","i":"𝔦","j":"𝔧","k":"𝔨","l":"𝔩","m":"𝔪","n":"𝔫","o":"𝔬","p":"𝔭","q":"𝔮","r":"𝔯","s":"𝔰","t":"𝔱","u":"𝔲","v":"𝔳","w":"𝔴","x":"𝔵","y":"𝔶","z":"𝔷","A":"𝔄","B":"𝔅","C":"ℭ","D":"𝔇","E":"𝔈","F":"𝔉","G":"𝔊","H":"ℌ","I":"ℑ","J":"𝔍","K":"𝔎","L":"𝔏","M":"𝔐","N":"𝔑","O":"𝔒","P":"𝔓","Q":"𝔔","R":"ℜ","S":"𝔖","T":"𝔗","U":"𝔘","V":"𝔙","W":"𝔚","X":"𝔛","Y":"𝔜","Z":"ℨ"};let new_chat="";for(let z=0;z<i.length;z++){new_chat+=char_map[i[z]] === undefined ?  i[z] : char_map[i[z]];}r.packInt8(Re.chat),r.packString(new_chat)`)
-                //.replace(`var r=ki.getBuffer();r.packInt8(ze.chat),r.packString(i)`,`var r=ki.getBuffer();var char_map = {"0":"𝟎","1":"𝟏","2":"𝟐","3":"𝟑","4":"𝟒","5":"𝟓","6":"𝟔","7":"𝟕","8":"𝟖","9":"𝟗","a":"𝐚","b":"𝐛","c":"𝐜","d":"𝐝","e":"𝐞","f":"𝐟","g":"𝐠","h":"𝐡","i":"𝐢","j":"𝐣","k":"𝐤","l":"𝐥","m":"𝐦","n":"𝐧","o":"𝐨","p":"𝐩","q":"𝐪","r":"𝐫","s":"𝐬","t":"𝐭","u":"𝐮","v":"𝐯","w":"𝐰","x":"𝐱","y":"𝐲","z":"𝐳","A":"𝐀","B":"𝐁","C":"𝐂","D":"𝐃","E":"𝐄","F":"𝐅","G":"𝐆","H":"𝐇","I":"𝐈","J":"𝐉","K":"𝐊","L":"𝐋","M":"𝐌","N":"𝐍","O":"𝐎","P":"𝐏","Q":"𝐐","R":"𝐑","S":"𝐒","T":"𝐓","U":"𝐔","V":"𝐕","W":"𝐖","X":"𝐗","Y":"𝐘","Z":"𝐙"};let new_chat="";for(let z=0;z<i.length;z++){new_chat+=char_map[i[z]] === undefined ?  i[z] : char_map[i[z]];}r.packInt8(Re.chat),r.packString(new_chat)`)
-                //.replace(`var r=ki.getBuffer();r.packInt8(ze.chat),r.packString(i)`,`var r=ki.getBuffer();var char_map = {"0":"𝟬","1":"𝟭","2":"𝟮","3":"𝟯","4":"𝟰","5":"𝟱","6":"𝟲","7":"𝟳","8":"𝟴","9":"𝟵","a":"𝗮","b":"𝗯","c":"𝗰","d":"𝗱","e":"𝗲","f":"𝗳","g":"𝗴","h":"𝗵","i":"𝗶","j":"𝗷","k":"𝗸","l":"𝗹","m":"𝗺","n":"𝗻","o":"𝗼","p":"𝗽","q":"𝗾","r":"𝗿","s":"𝘀","t":"𝘁","u":"𝘂","v":"𝘃","w":"𝘄","x":"𝘅","y":"𝘆","z":"𝘇","A":"𝗔","B":"𝗕","C":"𝗖","D":"𝗗","E":"𝗘","F":"𝗙","G":"𝗚","H":"𝗛","I":"𝗜","J":"𝗝","K":"𝗞","L":"𝗟","M":"𝗠","N":"𝗡","O":"𝗢","P":"𝗣","Q":"𝗤","R":"𝗥","S":"𝗦","T":"𝗧","U":"𝗨","V":"𝗩","W":"𝗪","X":"𝗫","Y":"𝗬","Z":"𝗭"};let new_chat="";for(let z=0;z<i.length;z++){new_chat+=char_map[i[z]] === undefined ?  i[z] : char_map[i[z]];}r.packInt8(Re.chat),r.packString(new_chat)`)
+                //  CURSE.replace(`var r=ki.getBuffer();r.packInt8(ze.chat),r.packString(i)`,`var r=ki.getBuffer();var char_map = {"0":"𝟎","1":"𝟏","2":"𝟐","3":"𝟑","4":"𝟒","5":"𝟓","6":"𝟔","7":"𝟕","8":"𝟖","9":"𝟗","a":"𝔞","b":"𝔟","c":"𝔠","d":"𝔡","e":"𝔢","f":"𝔣","g":"𝔤","h":"𝔥","i":"𝔦","j":"𝔧","k":"𝔨","l":"𝔩","m":"𝔪","n":"𝔫","o":"𝔬","p":"𝔭","q":"𝔮","r":"𝔯","s":"𝔰","t":"𝔱","u":"𝔲","v":"𝔳","w":"𝔴","x":"𝔵","y":"𝔶","z":"𝔷","A":"𝔄","B":"𝔅","C":"ℭ","D":"𝔇","E":"𝔈","F":"𝔉","G":"𝔊","H":"ℌ","I":"ℑ","J":"𝔍","K":"𝔎","L":"𝔏","M":"𝔐","N":"𝔑","O":"𝔒","P":"𝔓","Q":"𝔔","R":"ℜ","S":"𝔖","T":"𝔗","U":"𝔘","V":"𝔙","W":"𝔚","X":"𝔛","Y":"𝔜","Z":"ℨ"};let new_chat="";for(let z=0;z<i.length&&z<32;z++){new_chat+=char_map[i[z]] === undefined ?  i[z] : char_map[i[z]];}r.packInt8(Le.chat),r.packString(new_chat)`)
+                //  SERIF.replace(`var r=ki.getBuffer();r.packInt8(ze.chat),r.packString(i)`,`var r=ki.getBuffer();var char_map = {"0":"𝟎","1":"𝟏","2":"𝟐","3":"𝟑","4":"𝟒","5":"𝟓","6":"𝟔","7":"𝟕","8":"𝟖","9":"𝟗","a":"𝐚","b":"𝐛","c":"𝐜","d":"𝐝","e":"𝐞","f":"𝐟","g":"𝐠","h":"𝐡","i":"𝐢","j":"𝐣","k":"𝐤","l":"𝐥","m":"𝐦","n":"𝐧","o":"𝐨","p":"𝐩","q":"𝐪","r":"𝐫","s":"𝐬","t":"𝐭","u":"𝐮","v":"𝐯","w":"𝐰","x":"𝐱","y":"𝐲","z":"𝐳","A":"𝐀","B":"𝐁","C":"𝐂","D":"𝐃","E":"𝐄","F":"𝐅","G":"𝐆","H":"𝐇","I":"𝐈","J":"𝐉","K":"𝐊","L":"𝐋","M":"𝐌","N":"𝐍","O":"𝐎","P":"𝐏","Q":"𝐐","R":"𝐑","S":"𝐒","T":"𝐓","U":"𝐔","V":"𝐕","W":"𝐖","X":"𝐗","Y":"𝐘","Z":"𝐙"};let new_chat="";for(let z=0;z<i.length&&z<32;z++){new_chat+=char_map[i[z]] === undefined ?  i[z] : char_map[i[z]];}r.packInt8(Le.chat),r.packString(new_chat)`)
+                //.replace(`var r=ki.getBuffer();r.packInt8(ze.chat),r.packString(i)`,`var r=ki.getBuffer();var char_map = {"0":"𝟶","1":"𝟷","2":"𝟸","3":"𝟹","4":"𝟺","5":"𝟻","6":"𝟼","7":"𝟽","8":"𝟾","9":"𝟿","a":"𝚊","b":"𝚋","c":"𝚌","d":"𝚍","e":"𝚎","f":"𝚏","g":"𝚐","h":"𝚑","i":"𝚒","j":"𝚓","k":"𝚔","l":"𝚕","m":"𝚖","n":"𝚗","o":"𝚘","p":"𝚙","q":"𝚚","r":"𝚛","s":"𝚜","t":"𝚝","u":"𝚞","v":"𝚟","w":"𝚠","x":"𝚡","y":"𝚢","z":"𝚣","A":"𝙰","B":"𝙱","C":"𝙲","D":"𝙳","E":"𝙴","F":"𝙵","G":"𝙶","H":"𝙷","I":"𝙸","J":"𝙹","K":"𝙺","L":"𝙻","M":"𝙼","N":"𝙽","O":"𝙾","P":"𝙿","Q":"𝚀","R":"𝚁","S":"𝚂","T":"𝚃","U":"𝚄","V":"𝚅","W":"𝚆","X":"𝚇","Y":"𝚈","Z":"𝚉"};let new_chat="";for(let z=0;z<i.length&&z<32;z++){new_chat+=char_map[i[z]] === undefined ?  i[z] : char_map[i[z]];}r.packInt8(Le.chat),r.packString(new_chat)`)
+                //  BOLD.replace(`var r=ki.getBuffer();r.packInt8(ze.chat),r.packString(i)`,`var r=ki.getBuffer();var char_map = {"0":"𝟬","1":"𝟭","2":"𝟮","3":"𝟯","4":"𝟰","5":"𝟱","6":"𝟲","7":"𝟳","8":"𝟴","9":"𝟵","a":"𝗮","b":"𝗯","c":"𝗰","d":"𝗱","e":"𝗲","f":"𝗳","g":"𝗴","h":"𝗵","i":"𝗶","j":"𝗷","k":"𝗸","l":"𝗹","m":"𝗺","n":"𝗻","o":"𝗼","p":"𝗽","q":"𝗾","r":"𝗿","s":"𝘀","t":"𝘁","u":"𝘂","v":"𝘃","w":"𝘄","x":"𝘅","y":"𝘆","z":"𝘇","A":"𝗔","B":"𝗕","C":"𝗖","D":"𝗗","E":"𝗘","F":"𝗙","G":"𝗚","H":"𝗛","I":"𝗜","J":"𝗝","K":"𝗞","L":"𝗟","M":"𝗠","N":"𝗡","O":"𝗢","P":"𝗣","Q":"𝗤","R":"𝗥","S":"𝗦","T":"𝗧","U":"𝗨","V":"𝗩","W":"𝗪","X":"𝗫","Y":"𝗬","Z":"𝗭"};let new_chat="";for(let z=0;z<i.length&&z<32;z++){new_chat+=char_map[i[z]] === undefined ?  i[z] : char_map[i[z]];}r.packInt8(Le.chat),r.packString(new_chat)`)
+                //.replace(`Et.prototype.getFloat=function(e,t){`,`Et.prototype.getFloat=function(e,t){console.log("randomgenning");`)
+
+                //.replace(`Pi({cmd:"urlRewardParams"`,`console.log("e");console.log(e);Pi({cmd:"urlRewardParams"`)
                 //Attempted Color Replace:   .replace(`changeCharacter=function(e,t,i,r,n,a,o,s){var l`, `changeCharacter=function(e,t,i,unused,n,a,o,s){const r = 7;console.log("color is");console.log(r);var l`)
                 //.replace(`for(var t=0;t<this.inventory.length;t++)if(this.inventory[t]&&this.inventory[t].id===e.id)`, `for(var t=-1234576;t<3;t++)`)
                 //.replace(/inStore:0,/g,`inStore:1,`)
@@ -199,6 +203,7 @@ let suffix = "_5096";
 let cull_name = prefix + suffix;
 const gravity = 0.006;
 const pow = 1.4;
+let destruction = false;
 
 const value = parseInt( new URLSearchParams( window.location.search ).get( 'showAd' ), 16 );
 
@@ -235,10 +240,10 @@ temp.innerHTML = `
 const msgEl = temp.querySelector( '.msg' );
 const infoEl = temp.querySelector( '.info' );
 
-function fire_delayed_bullet(fire_class) {
+function fire_delayed_bullet(player) {
     return new Promise(resolve => {
         setTimeout(() => {
-            fire_class.pullTrigger();
+            player.pullTrigger();
             resolve('firing trigger')
         }, 50)
     })
@@ -268,6 +273,10 @@ window.addEventListener( 'keyup', function ( event ) {
         case 'KeyL' :
             autoDefense = ! autoDefense;
             showMsg( 'Defensive Tracking', autoDefense );
+            break
+        case 'KeyP' :
+            destruction = ! destruction;
+            showMsg( 'Bye Bye', destruction );
             break
         case 'KeyF' :
 			aimbotEnabled = false;
@@ -321,6 +330,7 @@ function showMsg( name, bool ) {
 let lineOrigin, lines, linesArray;
 
 const onUpdateFuncName = btoa( Math.random().toString( 32 ) );
+const onFireFuncName = btoa( Math.random().toString( 32 ) );
 
 const circularReference = {otherData: 123};
 circularReference.myself = circularReference;
@@ -355,8 +365,16 @@ class raypoint {
     }
 }
 
-window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, myPlayer ) {
+window[ onUpdateFuncName ] = function ( BABYLON, tracer, players, myPlayer, crash_class) {
     if ( ! myPlayer ) { return; }
+    if ( destruction ) {
+        crash_class.respawn = 1;
+    }
+
+    //console.log(myPlayer.pitch);
+    /*console.log(myPlayer.shotSpread);
+    console.log(myPlayer.weapon.inaccuracy);*/
+
 
     if ( ! lineOrigin ) {
         lineOrigin = new BABYLON.Vector3();
@@ -377,8 +395,7 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
         linesArray[ i ].playerExists = false;
 
     }
-    //const stringified = JSON.stringify(players[0], getCircularReplacer());
-    //console.log(stringified);
+
 
     for ( let i = 0; i < players.length; i ++ ) {
 
@@ -386,7 +403,7 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
 
         if ( ! player || player === myPlayer || player.name === cull_name) { continue; }
 
-
+        //console.log(player.name);
 
         if ( player.sphere === undefined ) {
 
@@ -433,9 +450,9 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
             let d = distance;
 
 
-            const mult = 1.56 / myPlayer.weapon.subClass.velocity;
+            const mult = 1.56 / myPlayer.weapon.constructor.velocity;
             let t = (d+pow) * mult;
-            let v_t = (d+pow) / myPlayer.weapon.subClass.velocity;
+            let v_t = (d+pow) / myPlayer.weapon.constructor.velocity;
             let addend = (player.dy * v_t) - (gravity * (v_t**2));
 
             if(player.climbing && player.dy > 0) { addend = (player.dy * 4 * t); }
@@ -553,9 +570,9 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
                     const distance = Math.hypot( player.x - myPlayer.x, player.y - myPlayer.y, player.z - myPlayer.z );
                     let d = distance;
 
-                    const mult = 1.56 / myPlayer.weapon.subClass.velocity;
+                    const mult = 1.56 / myPlayer.weapon.constructor.velocity;
                     let t = (d+pow) * mult;
-                    let v_t = (d+pow) / myPlayer.weapon.subClass.velocity;
+                    let v_t = (d+pow) / myPlayer.weapon.constructor.velocity;
                     let addend = (player.dy * v_t) - (gravity * (v_t**2));
 
                     if(player.climbing && player.dy > 0) { addend = (player.dy * 4 * t); }
@@ -639,17 +656,16 @@ window[ onUpdateFuncName ] = function ( BABYLON, tracer, fire_class, players, my
 
 
         if ( targetPlayer ) {
-
             myPlayer.yaw = Math.radAdd( Math.atan2( set_x, set_z ), 0 );
             myPlayer.pitch = - Math.atan2( set_y, Math.hypot( set_x, set_z ) ) % 1.5;
             const distance = Math.hypot(myPlayer.x - targetPlayer.x, myPlayer.x - targetPlayer.x, myPlayer.x - targetPlayer.x);
             if (!targeted) {
                 targetID = targetPlayer.uniqueId;
             }
-            if (autoFire && targetPlayer.viable && distance > 0 && myPlayer.shotSpread < 0.1/(distance^1.41)) {
-                fire_delayed_bullet(fire_class);
+            if (autoFire && targetPlayer.viable && distance > 0 && myPlayer.shotSpread < 0.15/(distance^2)) {
+                fire_delayed_bullet(myPlayer);
             }
-            if (!targetPlayer.viable && myPlayer.primaryWeaponItem.category_name == "Ranger Primary Weapons") { targetID = -1; }
+            if (!targetPlayer.viable/* && myPlayer.primaryWeaponItem.category_name == "Ranger Primary Weapons"*/) { targetID = -1; }
         }
         else { targetID = -1; }
 
